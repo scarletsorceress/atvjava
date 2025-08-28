@@ -13,6 +13,10 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     //criando o método buscarProdutoPorNome(List<Produto> produtos, String nome) que retorna um Optional<Produto> usando filter e findFirst
     public static Optional<Produto> buscarProdutoPorNome(List<Produto> produtos, String nome) {
         return produtos.stream()
@@ -55,7 +59,7 @@ public class Produto {
                 .forEach(p -> System.out.println("Nome: " + p.nome + ", Preço: R$" + p.preco));
                 
                 
-        //criando uma nova lista apenas apenas com os preços maiores que 500 usando apenas filter e map, sem toList
+        //criando uma nova lista apenas apenas com os preços maiores que 500 usando apenas filter e map
         System.out.println("\nPreços maiores que R$500:");
         produtos.stream()
                 .filter(p -> p.preco > 500)
@@ -77,6 +81,19 @@ public class Produto {
             System.out.println(e.getMessage());
             
         }
+
+        //criando stream e usando .map para obter uma list<string> apenas com os nomes dos produtos, sem toList
+        System.out.println("\nNomes dos produtos:");
+        produtos.stream()
+                .map(p -> p.nome)
+                .forEach(nome -> System.out.println(nome));
+        
+        //fazendo o mesmo porem usando uma referencia de metodo ao invés de uma função lambda
+        System.out.println("\nNomes dos produtos (usando referência de método):");
+        produtos.stream()
+                .map(Produto::getNome)
+                .forEach(System.out::println);
     }
+
     }
 }
