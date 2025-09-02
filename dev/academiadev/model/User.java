@@ -1,6 +1,8 @@
+package dev.academiadev.model;
+
 public abstract class User {
-    private final String name;
-    private final String email;
+    protected final String name;
+    protected final String email;
 
     protected User(String name, String email) {
         this.name = name;
@@ -10,8 +12,8 @@ public abstract class User {
     public String getName() { return name; }
     public String getEmail() { return email; }
 
+    public abstract boolean isAdmin();
+
     @Override
-    public String toString() {
-        return String.format("%s <%s>", name, email);
-    }
+    public String toString() { return String.format("%s <%s>", name, email); }
 }
