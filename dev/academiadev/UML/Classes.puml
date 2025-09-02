@@ -1,0 +1,20 @@
+@startuml
+package "dev.academiadev.model" {
+  abstract class User { name; email; +isAdmin() }
+  class Admin
+  class Student { -subscriptionPlan }
+  class Course { +title; +description; +instructorName; +durationInHours; +difficultyLevel; +status }
+  class Enrollment { +id; +progress; +active }
+  interface SubscriptionPlan { +getPlanName(); +canEnrollMore(int) }
+  class BasicPlan
+  class PremiumPlan
+  class SupportTicket { +id; +title; +message; +createdAt }
+}
+User <|-- Admin
+User <|-- Student
+SubscriptionPlan <|-- BasicPlan
+SubscriptionPlan <|-- PremiumPlan
+Student "1" -- "*" Enrollment
+Course "1" -- "*" Enrollment
+Student "*" -- "*" SupportTicket : requester
+@enduml
